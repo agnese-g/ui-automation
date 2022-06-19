@@ -1,0 +1,8 @@
+docker build --no-cache -t maven .
+docker build --no-cache -t agneseg/mvn_tests:latest .
+docker push agneseg/mvn_tests:latest
+
+
+docker volume create --name maven-repo
+docker run -it -v maven:/root/.m2 maven mvn archetype:generate
+docker run -it -v maven:/usr/src/docker maven mvn archetype:generate
